@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-# Prints string via until
+# A simple until loop that prints a jtext multiple times
+
 i=0
-until [ $((i++)) -gt 9 ]; do
-	echo Best School
+until [ $i == 10 ]
+do
+	echo "Best School"
+	i=$((i + 1))
 done

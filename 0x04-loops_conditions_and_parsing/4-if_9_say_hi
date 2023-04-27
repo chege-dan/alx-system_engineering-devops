@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
-# Prints string 10 times except on 9th
+# A simple while loop with an if statement
+
 i=0
-while [ $((i++)) -lt 10 ]; do
-	echo Best School
-	if [ $i -eq 9 ]; then
-		echo Hi
+while ((i < 10))
+do
+	echo "Best School"
+	i=$((i + 1))
+
+	if [[ $i -eq 9 ]]
+	then
+		echo "Hi"
 	fi
 done
