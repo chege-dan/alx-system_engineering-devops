@@ -16,8 +16,8 @@ frontend http_frontend
         default_backend http_backend
 backend http_backend
         balance roundrobin
-        server web-01 52.91.146.214:80 check
-        server web-02 54.160.76.161:80 check
+        server web-01 54.237.56.74:80 check
+        server web-02 54.158.182.112:80 check
 EOT
 
 # Enable HAproxy to be started by an init script
