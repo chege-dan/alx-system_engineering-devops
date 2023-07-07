@@ -1,20 +1,23 @@
 #!/usr/bin/env bash
-# print details obout the domains and subdomains
+# Getting details of subdomains
 
-
-print_domain_subdomain () {
-    line=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')
-    echo "$2 $line" | awk '{print "The subdomain " $1 " is a " $2 " record and points to " $3}'
+subdmninfo () {
+   dnsentry="$(dig "$2.$1" | grep -A1 'ANSWER SECTION:')"
+   sbdmn="The subdomain $2 is a "
+   echo "$dnsentry" | awk "NR==2 {print \"$sbdmn\" \$4 \" record and points to \" \$5}"
 }
 
-if [ "$#" == 1 ]
+if [ -z "$1" ]
 then
+  exit
+fi
 
-    print_domain_subdomain "$1" "www"
-  	print_domain_subdomain "$1" "lb-01"
-  	print_domain_subdomain "$1" "web-01"
-  	print_domain_subdomain "$1" "web-02"
-elif [ "$#" == 2 ]
+if [ -z "$2" ]
 then
-	print_domain_subdomain "$1" "$2"
+  subdmninfo "$1" "www"
+  subdmninfo "$1" "lb-01"
+  subdmninfo "$1" "web-01"
+  subdmninfo "$1" "web-02"
+else
+  subdmninfo "$1" "$2"
 fi

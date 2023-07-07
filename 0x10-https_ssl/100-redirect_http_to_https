@@ -35,6 +35,7 @@ defaults
 frontend http_frontend
 	bind *:80
 	bind *:443 ssl crt /etc/haproxy/certs/warmware.tech.pem
+	redirect scheme https code 301 if !{ ssl_fc }
 	mode http
 	default_backend http_backend
 backend http_backend
